@@ -130,6 +130,7 @@
       $params = array(
         'screen_name' => $this->options['twitter_screen_name'],
         'count' => $this->options['tweets_to_retrieve'],
+          //'max_id' => '765095132681076736',
         'tweet_mode' => 'extended',
       );
       if ($this->options['ignore_retweets']) {
