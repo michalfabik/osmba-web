@@ -30,7 +30,7 @@ msgid: {$r->msgid}">
                 <h3> <a class="ajax" n:href="author $template->talkstub($r->from)">{$r->name ?: 'N/A'}</a></h3>
                 &lt;{$r->from|replace:"@":" at "}&gt;
                 <br>
-                <span class="stat" title="Počet příspěvků v konferenci talk-cz"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>{$r->talk_cz_mails}</span>
+                <span class="stat" title="Počet příspěvků v konferenci talk-ba"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>{$r->talk_cz_mails}</span>
                 {if $r->username}
                     {* <h3> <a class="ajax" n:href="author $template->talkstub($r->from)">{$r->fullname}</a></h3> *}
                     <span class="stat" title="Počet changesetů na osm.org (účet {$r->username} vytvořen {$r->account_created|date:'j.n.Y'})"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>{$r->changesets}</span>
@@ -43,6 +43,6 @@ msgid: {$r->msgid}">
     <hr>
      <a class="ajax" n:href="default $max->format(Ym)" class="pull-right">&laquo; zpět na výpis měsíce</a>
 
-    {* REPLY LINK: mailto:talk-cz%40openstreetmap.org?Subject=Re%3A%20%5BTalk-cz%5D%20%3D%3Futf-8%3Fb%3FTmV1csSNaXTDqSDEjcOhcnkgdiBCcm7Emw%3D%3D%3F%3D&In-Reply-To=%3C4p.8LDB.2zCXIrjrMdQ.1Q8JYU%40seznam.cz%3E *}
+    {* REPLY LINK: mailto:talk-ba%40openstreetmap.org?Subject=Re%3A%20%5BTalk-cz%5D%20%3D%3Futf-8%3Fb%3FTmV1csSNaXTDqSDEjcOhcnkgdiBCcm7Emw%3D%3D%3F%3D&In-Reply-To=%3C4p.8LDB.2zCXIrjrMdQ.1Q8JYU%40seznam.cz%3E *}
 
 </div>

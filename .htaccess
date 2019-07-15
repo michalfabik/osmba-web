@@ -18,15 +18,15 @@ RewriteBase /
 
 
 RewriteCond %{HTTPS} !on
-RewriteCond %{HTTP_HOST} ^(www.)?openstreetmap.cz$
-RewriteRule ^.*$ https://openstreetmap.cz/$0 [R=301,L]
+RewriteCond %{HTTP_HOST} ^(www.)?openstreetmap.ba$
+RewriteRule ^.*$ https://openstreetmap.ba/$0 [R=301,L]
 
 
 ##
 ## Uncomment to prefer www-prefixed domain name
 ##
-RewriteCond %{HTTP_HOST} ^www.openstreetmap.cz$
-RewriteRule ^.*$ https://openstreetmap.cz/$0 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.openstreetmap.ba$
+RewriteRule ^.*$ https://openstreetmap.ba/$0 [R=301,L]
 
 
 ##

@@ -15,7 +15,7 @@ if (!function_exists('gzdecode')) {
 
 // get current mbox archive
 $url =
-  "https://lists.openstreetmap.org/pipermail/talk-cz/" . date('Y-F') . ".txt";
+  "https://lists.openstreetmap.org/pipermail/talk-ba/" . date('Y-F') . ".txt";
 $mbox = file_get_contents($url);
 if (!$mbox) {
   $url .= ".gz";
@@ -24,14 +24,14 @@ if (!$mbox) {
 
 insertMailsFromMbox($mbox);
 
-/*/
+/*
 set_time_limit(10*60);
 
 // fetch all from 2007-1 til now
-for ($y = 2007; $y <= date('Y'); $y++) {
+for ($y = 2017; $y <= date('Y'); $y++) {
     for ($m = 1; $m <= 12; $m++) {
 
-        $url = "https://lists.openstreetmap.org/pipermail/talk-cz/" . date('Y-F', strtotime("$y-$m-10")) . ".txt.gz";
+        $url = "https://lists.openstreetmap.org/pipermail/talk-ba/" . date('Y-F', strtotime("$y-$m-10")) . ".txt.gz";
         echo "<hr>$url<br>";
         $mbox = gzdecode(file_get_contents($url));
         insertMailsFromMbox($mbox);
@@ -44,7 +44,7 @@ for ($y = 2007; $y <= date('Y'); $y++) {
             break;
     }
 }
-//*/
+*/
 
 /**
  * @param $mbox plain text format
@@ -76,7 +76,7 @@ function insertMailsFromMbox($mbox)
     }
 
     $subject = $e->getSubject();
-    $subject = preg_replace('/^\[[Tt]alk-cz\] */', '', $subject);
+    $subject = preg_replace('/^\[[Tt]alk-ba\] */', '', $subject);
 
     // find conversation
     $cid = dibi::fetchSingle(
