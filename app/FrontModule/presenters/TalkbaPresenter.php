@@ -1,5 +1,5 @@
 <?php
-class Front_TalkczPresenter extends Front_BasePresenter
+class Front_TalkbaPresenter extends Front_BasePresenter
 {
   public function startup()
   {

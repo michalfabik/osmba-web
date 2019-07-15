@@ -58,17 +58,17 @@ $oldFrontRouter = $container->router[1];
 $container->router[1] = new RouteList('Front');
 $container->router[1][] = new Route(
   'talkba/c<id [0-9]+>',
-  'Talkcz:conversation',
+  'Talkba:conversation',
   isset($_SERVER['HTTPS']) ? Route::SECURED : false
 );
 $container->router[1][] = new Route(
   'talkba/<month [0-9]{6}>',
-  'Talkcz:default',
+  'Talkba:default',
   isset($_SERVER['HTTPS']) ? Route::SECURED : false
 );
 $container->router[1][] = new Route(
   'talkba/<stub .+-[0-9a-f]{5}>',
-  'Talkcz:author',
+  'Talkba:author',
   isset($_SERVER['HTTPS']) ? Route::SECURED : false
 );
 
