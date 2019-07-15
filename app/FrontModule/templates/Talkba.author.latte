@@ -1,15 +1,15 @@
 {block title}[Talk-cz] {$author->name ?: 'Profil autora'}{/block}
-{block map}{include #osmczmap}{/block}
+{block map}{include #osmbamap}{/block}
 
 {block content}
 <div class="container mailarchive" n:snippet="content">
     <div class="pull-right margin-top-10">
-        <a class="ajax" n:href="default">&laquo; zpět na archiv</a> |
+        <a class="ajax" n:href="default">&laquo; nazad na arhivu</a> |
         <select onchange="jQuery.nette.callUrl(this)">
-            <option>-- měsíc --</option>
+            <option>-- mjesec --</option>
             {foreach $monthList as $m}
                 <option value="{link default $m->ym}">
-                    {$m->date|date:n|czechMonth} {$m->date|date:Y} ({$m->count})
+                    {$m->date|date:n|strMonth} {$m->date|date:Y} ({$m->count})
                 </option>
             {/foreach}
         </select>
@@ -22,11 +22,11 @@
     </div>
 
     {if isset($author->username)}
-        {include $themeDir."/inc_komunita.latte", is_wide => true, author_list => [$author]}
+        {include $themeDir."/inc_zajednica.latte", is_wide => true, author_list => [$author]}
     {else}
         <div class="pull-right">
-                <i>Pozn.: Profil OSMCZ nebyl založen, možnost je dole na stránce <a href="/komunita">komunita</a>
-                        <br>Ikona vlevo je ze služby gravatar.com pro příslušnou emailovou adresu.
+                <i>Napomena: OSMBiH profil nije kreiran, mogućnost osnivanja je dole na stranici <a href="/zajednica">zajednica</a>
+                        <br>Slika lijevo je sa usluge gravatar.com za predmetnu email adresu.
                     </i>
         </div>
     {/if}
@@ -34,7 +34,7 @@
 
 
     <hr>
-    <p>Počet příspěvků: <b>{count($mailList)}</b> </p>
+    <p>Broj postova: <b>{count($mailList)}</b> </p>
 
 
     <ul>
@@ -45,6 +45,6 @@
     </ul>
 
     <hr>
-     <a class="ajax pull-right" n:href="default">&laquo; zpět na archiv</a>
+     <a class="ajax pull-right" n:href="default">&laquo; nazad na arhivu</a>
 
 </div>

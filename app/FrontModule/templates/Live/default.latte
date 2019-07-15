@@ -1,4 +1,4 @@
-{block title}Školení{/block}
+{block title}Obuka{/block}
 {block #content}
 <style n:syntax="off">ol li { margin-bottom: 0.3em }</style>
 <div class="container">
@@ -9,25 +9,25 @@
 				<div n:foreach="$flashes as $flash" class="flash alert alert-success">
 					{$flash->message}
 				</div>&nbsp;
-				<script>window.setTimeout(function(){ $('.flashes div').fadeOut(8000); }, 5000);</script> {* za 5sec už je $ inicializován *}
+				<script>window.setTimeout(function(){ $('.flashes div').fadeOut(8000); }, 5000);</script> {* za 5 sekundi je $ inicijaliziran *}
 			</div>
 			{control userForm}
-			Na email vám do týdne přijde prezentace.
+			Na vaš email će stići prezentacija u roku od sedam dana.
 		</div>
-		<h3>Školení OpenStreetMap</h3>
+		<h3>OpenStreetMap obuka</h3>
 		<ol>
-			<li>Registrujte se na <a href="https://www.openstreetmap.org/user/new" target="_blank" rel="noopener">webu OpenStreetMap.org</a>
-			<li>Potvrďte registrační email
-			<li>Vyplňte do formulář vpravo svůj <b>OSM účet</b>
-			<li>Na webu OpenStreetMap.org klikněte nahoře na <b>[Upravit]</b>
-			<li>Klikněte na velké tlačítko <b>[Prohlídku editoru]</b>
+			<li>Registrujte se na <a href="https://www.openstreetmap.org/user/new" target="_blank" rel="noopener">web sajtu OpenStreetMap.org</a>
+			<li>Potvrdite email za registraciju
+			<li>U formular desno upišite svoje <b>OSM korisničko ime</b>
+			<li>Na sajtu OpenStreetMap.org kliknite gore na <b>[Urediti]</b>
+			<li>Kliknite na veliko dugme <b>[Start the Walkthrough]</b>
 		</ol>
-		<p>Užitečné odkazy: <a href="https://wiki.openstreetmap.org/wiki/Cs:Map_Features">Map_features</a>, <a href="https://wiki.osm.org/">wiki.osm.org</a>
+		<p>Korisni linkovi: <a href="https://wiki.openstreetmap.org/wiki/Bs:Map_Features">Map_features</a>, <a href="https://wiki.osm.org/">wiki.osm.org</a>
 
 
 
 		<div style="clear:both"><hr></div>
-		<p>Zde můžete napsat vzkaz/dotaz ostatním na školení, třeba i vyměnit nějaké CWG.</p>
+		<p>Ovdje možete napisati poruku ili pitanje ostalima na obuci.</p>
         {snippet postform}
 			{control postForm}
 		{/snippet}
@@ -53,7 +53,7 @@
 
 	</div><!--/span-->
 	<div class="col-md-4">
-		<p>Dnešní školení:
+		<p>Današnja obuka:
 
 		{snippet userlist|strip}
 			<table>
@@ -68,9 +68,9 @@
 						<span n:class="label, $r->isonline ? label-success : label-warning">{$r->name}</span>
 						<i n:if="$r->fullname" class="icon-comment" onclick="alert(parentNode.title)"></i>
 					{if $r->osm}
-					<td title="Profil OSM: {$r->osm}, počet editací: {$r->osmedit}">
+					<td title="OSM profil: {$r->osm}, broj uređivanja: {$r->osmedit}">
 						<a href="http://www.openstreetmap.org/user/{$r->osm}"><img src="http://www.openstreetmap.org/favicon.ico" width=16></a>
-						{if $r->osmedit <= -1}účet neexistuje
+						{if $r->osmedit <= -1}korisnički nalog ne postoji
 						{elseif $r->osmedit}<i class="glyphicon glyphicon-ok"></i> <small>{!$r->osmedit>1 ? "$r->osmedit &times;" : ''}</small>
 						{/if}
 					{/if}
@@ -80,7 +80,7 @@
 		{/snippet}
 
 
-		<p>Po najetí na ikonku se zobrazí bublina s textem.
+		<p>Kada pređete mišom preko ikone, pojavit će se balon s tekstom.
 
 		<hr>
 			{var $datum = FALSE}
@@ -89,7 +89,7 @@
 				{if $datum != $r[registred]}
 					{var $datum = $r[registred]}
 					</table>
-					<p><br>Školení {$datum|date:'j.n.Y'}:
+					<p><br>Obuka {$datum|date:'j.n.Y'}:
 					<table>
 				{/if}
 

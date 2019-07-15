@@ -14,20 +14,20 @@ FileTemplate::extensionMethod('modified', function ($that, $s) {
 FileTemplate::extensionMethod('talkMailBody', function ($that, $s) {
   return Helpers::talkMailBody($s);
 });
-FileTemplate::extensionMethod('czechMonth', function ($that, $num) {
+FileTemplate::extensionMethod('strMonth', function ($that, $num) {
   $mesicetxt = array(
-    1 => "Leden",
-    "Únor",
-    "Březen",
-    "Duben",
-    "Květen",
-    "Červen",
-    "Červenec",
-    "Srpen",
-    "Září",
-    "Říjen",
-    "Listopad",
-    "Prosinec"
+    1 => "Januar",
+    "Februar",
+    "Mart",
+    "April",
+    "Maj",
+    "Jun",
+    "Jul",
+    "August",
+    "Septembar",
+    "Oktobar",
+    "Novembar",
+    "Decembar"
   );
   return $mesicetxt[$num];
 });
