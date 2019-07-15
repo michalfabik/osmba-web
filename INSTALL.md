@@ -1,69 +1,69 @@
-# nPress - opensource cms
+# nPress - open source CMS
 
-nPress je systém pro správu obsahu postavený na Nette Frameworku z roku 2012. Demo na [npress.zby.cz](http://npress.zby.cz) (od 7.12.2015 zrušena původní doména npress.info).
+nPress je sistem za uređivanje sadržaja osnovan na Nette Frameworku iz 2012. godine. Demo na [npress.zby.cz](http://npress.zby.cz) (od 7.12.2015. ne radi više izvorni domen npress.info).
 
-**Proč používat:**
+**Zašto koristiti:**
 
-- úprava strukturu ve více jazycích
-- dobrá práce s přílohami
-- rozšiření pomocí Nette Latte šablon (složka theme a meta `.template`, `.sectionTemplate`)
-- běží 2010-2016 cca na 10 webech k plné spokojenosti majitelů (z nekomerečních třeba [openstreetmap.cz](http://openstreetmap.cz), [blanik.info](http://blanik.info) či [smetanovokvarteto.cz](http://smetanovokvarteto.cz))
+- uređivanje strukture na više jezika
+- jednostavan rad sa prilozima
+- proširenje pomoću Nette Latte šablona (direktorij theme i meta direktiva `.template`, `.sectionTemplate`)
+- koristi se u periodu 2010.-2016. na 10 sajtova uz potpuno zadovoljstvo vlasnika (od nekomercijalnih npr. [openstreetmap.cz](http://openstreetmap.cz), [blanik.info](http://blanik.info) ili [smetanovokvarteto.cz](http://smetanovokvarteto.cz))
 
-**Proč nepoužívat:**
+**Zašto ne koristiti:**
 
-- staré nette
-- kdo neumí Latte šablony, moc to nerozšíří
-- vývoj nepokračuje
+- stari nette
+- ko ne zna Latte šablone, neće uspjeti da ga proširi previše
+- razvoj je stao
 
-# Instalace
+# Instalacija
 
-1. Stáhněte obsah repozitáře nebo distribuční verzi
-2. Připravte MySQL databázi a naimportujte soubor `/data/init.sql`
-   - V distribuční verzi se též nachází testovací data. Naleznete je
-     v `/data/npdemo.sql` a `/data/files/`.
-3. Soubor `/data/config.neon.sample` zkopírujte na `/data/config.neon`
+1. Preuzmite sadržaj repozitarija ili distribucijsku verziju
+2. Pripremite MySQL bazu podataka i importirajte fajl `/data/init.sql`
+   - U distribucijskoj verziji takođe se nalaze podaci za testiranje. Naći ćete ih
+     u `/data/npdemo.sql` i `/data/files/`.
+3. Fajl `/data/config.neon.sample` kopirajte u `/data/config.neon`
 
-- upravte připojení k databázi
-- nastavte heslo do administrace a případně další možnosti
-  - ověřte, že soubor `/data/config.neon` není dostupný z webu
+- uredite konekciju na bazu podataka
+- podesite šifru za administraciju, odnosno i druge opcije
+  - provjerite, da fajl `/data/config.neon` nije dostupan putem weba
 
-4. Nastavte oprávnění pro zápis do složek `/data/files/`, `/data/thumbs/`, `/app/log/` a `/app/temp/`
-5. Pokud spouštíte aplikaci v podsložce, v `.htaccess` zakomentujte `RewriteBase`
-6. Administrace je na adrese `<webova-cesta-k-npress>/admin/`
+4. Podesite ovlaštenja za pisanje u direktorije `/data/files/`, `/data/thumbs/`, `/app/log/` i `/app/temp/`
+5. Ukoliko pokrećete aplikaciju u poddirektoriju, u `.htaccess` zakomentirajte `RewriteBase`
+6. Administracija je na adresi `<web-put-prema-npressu>/admin/`
 7. Enjoy!
 
-pozn. kdykoliv něco nefunguje, co by fakt mělo, možná stačí smazat `/app/temp/cache`
+napomena: ako bilo šta ne radi što bi sigurno trebalo da radi, možda je dovoljno izbrisati `/app/temp/cache`
 
-Systém je stále v beta verzi, takže jistě obsahuje množství chyb. Bugy, prosím, hlašte na adrese https://github.com/zbycz/npress/issues Stejně tak budu rád za jakékoliv pull requesty či nápady. Pokud systém někde použijete, budu rád, když mi dáte vědět.
+Sistem je još uvijek beta verzija, tako da sigurno sadrži pno grešaka. Molim da javljate bugove na adresi https://github.com/zbycz/npress/issues. Isto ću biti zahvalan za bilo kakve pull requeste ili sugestije. Ako negdje upotrijebite ovaj sistem, biće mi drago ako mi javite.
 
-# Požadavky
+# Zahtjevi
 
-- PHP 5.2 a vyšší
-- požadavky Nette: http://doc.nette.org/cs/requirements
+- PHP 5.2 ili noviji
+- zahtjevi za Nette: http://doc.nette.org/en/requirements
 - Apache + mod_rewrite
-- MySQL databáze
+- MySQL baza podataka
 
-# Další featury
+# Dalje funkcije
 
-- Nepovinná složka `/theme/` může obsahovat šablony pro vlastní vzhled. Výchozí layout potom bude `@layout.latte` a stránku s metou: `.template=neco` zobrazí pomocí šablony `/theme/neco.latte`.
+- Opcionalni direktorij `/theme/` može da sadrži šablone za vlastiti izgled. Osnovni layout će onda biti `@layout.latte`, a stranicu sa meta direktivom: `.template=something` će prikazati pomoću šablone `/theme/something.latte`.
 
-- Stránku lze změnit v kategorii článků pomocí mety: `.category=yes` Následně se v menu přestanou podstránky zobrazovat a nabídne se rozhraní pro správu článků. Do textu kategorie je nutno přidat například makro `#-subpagesblog-<id_page>-#`
+- Stranicu je moguće promijeniti u kategoriju članaka pomoću meta direktive: `.category=yes`. Poslije toga će se u meniju prestati prikazivati podstranice, a pojaviće se interfejs za uređivanje članaka. U tekst kategorije treba dodati npr. makro `#-subpagesblog-<id_page>-#`
 
-- Makra najdete v `/app/components/NpMacros.php`, zatím nejsou content aware a v nejbližší době je očekává refactoring.
+- Makroe ćete naći u `/app/components/NpMacros.php`, za sada nisu content aware i u najbližoj budućnosti ih očekuje refactoring.
 
-- Pluginy jsou zatím ve zcela prvotním vývoji, pokud k nim máte nějaké nápady/připomínky prosím ozvěte se. Najdete je ve složce /app/plugins/. Aktivace v configu, například pomocí `plugins: PasswordPlugin:{password:123}` a na příslušené stránce nastavit metu: `.password=yes`
+- Pluginovi su za sada u skroz početnoj fazi razvoja. Ako imate neke sugestije/napomene za njih, molim da mi javite. Naći ćete ih u direktoriju /app/plugins/. Aktivacija u cofigu, npr. pomoću `plugins: PasswordPlugin:{password:123}`, a na odgovarajućoj stranici podesiti meta direktivu: `.password=yes`
 
-# Autor a licence
+# Autor i licenca
 
 (c) 2011-2012 Pavel Zbytovský [zby.cz](http://zby.cz)
-Pod licencí MIT - volně šiřte, prodávejte, zachovejte uvedení autora.
+Pod MIT licencom - slobodno širite, prodajite, uz navođenje autora.
 
-# Dokumentace (ehh)
+# Dokumentacija (uh...)
 
-Pluginy se registrují v configu pomocí sekce parameters.plugins. Každý plugin si pak registruje události ve svém statickém poli $events, při vyvolání (trigger) události je pak různým způsobem zavolána metoda pluginu přesně s názvem $event() a to na všech Pluginech, které ji registrují.dý
+Pluginovi se registruju u configu pomoću sekcije parameters.plugins. Svaki plugin onda sebi registruje događaje u svom statičkom nizu $events, prilikom izazivanja (trigger) događaja se onda na razne načine zove metoda pluginova tačno sa nazivom $event(), i to za sve pluginove koji je registruju.
 
-Vrací true, když každý spuštěný Plugin vrátil true.
+Vraća true ukoliko je svaki pokrenuti plugin vratio true.
 
-- `Presenter#triggerEvent($event, [$args])` - Plugin je připojen jako komponenta presenteru `$presenter[PluginName]`, metoda zavolána na ni
-- `Presenter#triggerStaticEvent($event, [$args])` - metoda zavolána staticky jako `PluginName::{$event}()`
-- `Presenter#triggerEvent_filter($event, $filter)` - metoda je volána postupně na všechny registrované a `$filter` je postupně předáván, nakonec vrácen.
+- `Presenter#triggerEvent($event, [$args])` - Plugin je spojen kao komponenta presentera `$presenter[PluginName]`, metoda se zove na nju.
+- `Presenter#triggerStaticEvent($event, [$args])` - metoda se zove statički kao `PluginName::{$event}()`.
+- `Presenter#triggerEvent_filter($event, $filter)` - metoda se zove postepeno za sve registrovane, a `$filter` se postepeno predaje, na kraju se vraća.
