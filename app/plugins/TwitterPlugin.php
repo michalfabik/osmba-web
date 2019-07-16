@@ -20,11 +20,11 @@ class TwitterPlugin extends Control
   {
     $TweetPHP = new TweetPHP(
       $this->config + array(
-        'twitter_screen_name' => 'osmcz',
+        'twitter_screen_name' => 'osmbih',
         'tweets_to_display' => 20,
         'tweets_to_retrieve' => 20,
         'ignore_retweets' => false,
-        'date_lang' => 'cs_CZ',
+        'date_lang' => 'bs_BA',
         'cachetime' => 120,
         'cache_dir' => $this->parent->context->params['tempDir'] . '/'
       )
@@ -100,7 +100,7 @@ class TwitterPlugin extends Control
         $text = $t['text'];
         $text = str_replace(self::getWeeklyLink($t), '', $text); // remove weekly_link
         $text = str_replace($matches[0], '', $text); // remove "Weekly...:"
-        $text = str_replace('OSM.cz ', 'OpenStreetMap.cz ', $text);
+        $text = str_replace('OSM.ba ', 'OpenStreetMap.ba ', $text);
         $text = self::linkifiedText($t, $text); //images or other links(?)
         $t['weekly_text'] = $text;
         $t['weekly_title'] = $matches[1];

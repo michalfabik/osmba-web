@@ -29,60 +29,60 @@ class CommunityFormPlugin extends AppForm
 
     $this->addText('username', 'OSM.org username')->setDisabled();
 
-    $this->addText('fullname', 'Celé jméno')
-      ->setOption('description', 'Ať se poznáme!')
-      ->addRule(Form::FILLED, '%label není vyplněn.')
-      ->addRule(Form::MIN_LENGTH, '%label musí mít alespoň 5 znaků.', 5);
+    $this->addText('fullname', 'Ime i prezime')
+      ->setOption('description', 'Da se zna ko je ko!')
+      ->addRule(Form::FILLED, '%label nije popunjeno.')
+      ->addRule(Form::MIN_LENGTH, '%label mora imati najmanje 5 znakova.', 5);
 
-    $this->addText('email', 'Talk-cz')
+    $this->addText('email', 'Talk-ba')
       ->setOption(
         'description',
-        'Email použivaný pro spočítání příspěvků v talk-cz (neveřejný)'
+        'Email koji se koristi za brojanje postova u talk-ba (nije za javnost)'
       )
-      ->addRule(Form::FILLED, '%label není vyplněn.')
-      ->addRule(Form::EMAIL, '%label není validní.');
+      ->addRule(Form::FILLED, '%label nije popunjen.')
+      ->addRule(Form::EMAIL, '%label nije validan.');
 
-    $this->addText('contact', 'Veřejný e-mail')
-      ->setOption('description', '(nepovinné)')
+    $this->addText('contact', 'Javni e-mail')
+      ->setOption('description', '(nije obavezno)')
       ->addCondition(Form::FILLED)
-      ->addRule(Form::EMAIL, '%label není validní.');
+      ->addRule(Form::EMAIL, '%label nije validan.');
 
     $this->addText('twitter', 'Twitter')->setOption(
       'description',
-      '(nepovinné) Uživatelské jméno bez zavináče'
+      '(nije obavezno) Korisničko ime bez @'
     );
     $this->addText('github', 'Github')->setOption(
       'description',
-      '(nepovinné) Uživatelské jméno'
+      '(nije obavezno) Korisničko ime'
     );
 
-    $this->addText('places', 'Výskyt')->setOption(
+    $this->addText('places', 'Mjesto')->setOption(
       'description',
-      '(nepovinné) Kde se vyskystuju - typicky jaká města.'
+      '(nije obavezno) Gdje me možete naći - u kom gradu/gradovima.'
     );
-    $this['places']->getControlPrototype()->placeholder = 'oddělené čárkou';
+    $this['places']->getControlPrototype()->placeholder = 'odvojite zarezom';
     $this['places']->getControlPrototype()->style = 'width: 40%';
 
-    $this->addText('tags', 'Oblasti zájmu')->setOption(
+    $this->addText('tags', 'Područja interesa')->setOption(
       'description',
-      '(nepovinné)'
+      '(nije obavezno)'
     );
-    $this['tags']->getControlPrototype()->placeholder = 'oddělené čárkou';
+    $this['tags']->getControlPrototype()->placeholder = 'ovojite zarezom';
     $this['tags']->getControlPrototype()->style = 'width: 60%';
     $this['tags']->getControlPrototype()->{'data-options'} = Json::encode(
       array_values($this->tags)
     );
 
-    $this->addMultiSelect('projects', 'Projekty', $this->projects)
+    $this->addMultiSelect('projects', 'Projekti', $this->projects)
       ->setOption(
         'description',
-        '(nepovinné) Projektovou stránku možno přidat v administraci. Případně napiš na dev@openstreetmap.cz'
+        '(nije obavezno) Stranicu projekta je moguće dodati u administraciji. Eventualno javite na dev@openstreetmap.ba'
       )
       ->getControlPrototype()->style = 'height:150px;width:40%';
 
-    $this->addCheckbox('public', 'Zveřejnit údaje na openstreetmap.cz');
+    $this->addCheckbox('public', 'Objaviti podatke na openstreetmap.ba');
 
-    $this->addSubmit('submit', 'Uložit údaje');
+    $this->addSubmit('submit', 'Sačuvaj podatke');
     $this->onSuccess[] = callback($this, 'submitted');
 
     $renderer = $this->getRenderer();

@@ -114,7 +114,7 @@ class OsmAuthPlugin extends Control
 
   public function login_motd()
   {
-    echo "<p><a href='/oauth/login'>Přihlásit přes osm.org</a><h2>Lokální účty:</h2>";
+    echo "<p><a href='/oauth/login'>Prijava preko osm.org</a><h2>Lokalni nalozi:</h2>";
   }
 
   public function admin_motd()
@@ -122,8 +122,8 @@ class OsmAuthPlugin extends Control
     if ($this->presenter->user->isInRole('user')) {
       $pairs = PagesModel::getPagesFlat()->getPairs();
       $row = $this->presenter->user->identity;
-      echo "<p>Jsi přihlášen jako <b><code>$row->id</code></b> - uživatel osm.org";
-      echo "<p>Máš oprávnění editovat tyto stránky a jejich podstránky:<ul>";
+      echo "<p>Prijavljeni ste kao <b><code>$row->id</code></b> - korisnik osm.org";
+      echo "<p>Imate pravo uređivati ove stranice i njihove podstranice:<ul>";
       $nic = true;
       foreach (explode(',', $row->webpages) as $id) {
         if (isset($pairs[$id])) {
@@ -134,15 +134,15 @@ class OsmAuthPlugin extends Control
         }
       }
       if ($row->webpages == 'all') {
-        echo '<li>Všechny!</li>';
+        echo '<li>Sve!</li>';
       } elseif ($nic) {
-        echo "<li>Žádné :-)";
+        echo "<li>Nikakve :-)";
       }
       echo "</ul>";
-      echo "<p>Pokud chceš editovat ještě něco, napiš prosím na dev@openstreetmap.cz.";
-      echo "<p>Pro znovunačtení práv, prosím, klikni sem: <a href='/oauth/login?backUrl=/admin' class='btn btn-default btn-xs'>Znovu načíst</a>.";
+      echo "<p>Ukoliko želite uređivati još nešto, molimo da javite na dev@openstreetmap.ba.";
+      echo "<p>Za ponovno učitanje ovlaštenja molimo kliknuti ovdje: <a href='/oauth/login?backUrl=/admin' class='btn btn-default btn-xs'>Učitati ponovo</a>.";
     } else {
-      echo '<p style="font-size:150%;text-align:center;">Jsi přihlášen jako <b><code>SuperAdmin</code></a>.';
+      echo '<p style="font-size:150%;text-align:center;">Prijavljeni ste kao <b><code>SuperAdmin</code></a>.';
     }
   }
 }
