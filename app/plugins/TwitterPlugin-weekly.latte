@@ -8,7 +8,7 @@
 
             <div class="author">
                 <a class="profile" href="{$t[weekly_link]}">
-                    <span class="full-name">Týdeník {$t[weekly_title]}</span>
+                    <span class="full-name">Sedmičnik {$t[weekly_title]}</span>
                 </a>
             </div>
 
@@ -19,16 +19,16 @@
             </div>
 
             <div class="footer" style="margin-top:-8px">
-                <a href="https://twitter.com/intent/tweet?in_reply_to={$t[id_str]}" title="Odpovědět"
+                <a href="https://twitter.com/intent/tweet?in_reply_to={$t[id_str]}" title="Odgovoriti"
                    target="_blank"><span class="glyphicon glyphicon-share-alt"></span></a>
-                <a href="https://twitter.com/intent/retweet?tweet_id={$t[id_str]}" title="Retweetnout"
+                <a href="https://twitter.com/intent/retweet?tweet_id={$t[id_str]}" title="Retweet"
                    target="_blank"><span class="glyphicon glyphicon-retweet"></span> {$t[retweet_count]>0 ? $t[retweet_count]}</a>
-                <a href="https://twitter.com/intent/like?tweet_id={$t[id_str]}" title="Lajknout"
+                <a href="https://twitter.com/intent/like?tweet_id={$t[id_str]}" title="Sviđa mi se"
                    target="_blank"><span class="glyphicon glyphicon-heart"></span> {$t[favorite_count]>0 ? $t[favorite_count]}</a>
             </div>
         </li>
     {/foreach}
 </ul>
 <div class="text-right load-more">
-    <a href="{plink this weeklys=>$w_limit+3}" class="ajax">načíst více</a> | <a href="/weekly" class="">o týdeníku</a>
+    <a href="{plink this weeklys=>$w_limit+3}" class="ajax">učitaj više</a> | <a href="/weekly" class="">o sedmičniku</a>
 </div>

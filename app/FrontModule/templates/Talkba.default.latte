@@ -1,5 +1,5 @@
-{block title}Archiv mailové konference talk-ba{/block}
-{block map}{include #osmczmap}{/block}
+{block title}Arhiva email konferencije talk-ba{/block}
+{block map}{include #osmbamap}{/block}
 
 {block content}
 <div class="container" n:snippet="content">
@@ -21,21 +21,21 @@
 
     {block monthControls}
     <div class="pull-right">
-        <a class="ajax" n:href="this $prev->format(Ym)">&laquo; Předchozí měsíc</a>
+        <a class="ajax" n:href="this $prev->format(Ym)">&laquo; Prethodni mjesec</a>
         <select onchange="jQuery.nette.callUrl(this)">
             {foreach $monthList as $m}
             <option value="{link default $m->ym}" n:attr="selected => ($m->ym == $month->format(Ym))">
-                {$m->date|date:n|czechMonth} {$m->date|date:Y} ({$m->count})
+                {$m->date|date:n|strMonth} {$m->date|date:Y} ({$m->count})
             </option>
             {/foreach}
         </select>
-        <a class="ajax" n:href="this $next->format(Ym)" n:if="$next <= new DateTime">Další měsíc &raquo;</a>
+        <a class="ajax" n:href="this $next->format(Ym)" n:if="$next <= new DateTime">Sljedeći mjesec &raquo;</a>
     </div>
     {/block}
-    <h2>{$month|date:n|czechMonth} {$month|date:Y}</h2>
+    <h2>{$month|date:n|strMonth} {$month|date:Y}</h2>
 
     {if !count($result)}
-    <div class="alert alert-warning">V tomto měsíci nebyla nalezena žádná konferenční vlákna.</div>
+    <div class="alert alert-warning">U ovom mjesecu nije pronađena nikakva tema.</div>
     {/if}
 
     <table class="table">
@@ -47,7 +47,7 @@
                 <td class="subject">
                     <a class="ajax" n:href="conversation $r->conversationid">{$r->subject?:'N/A'|truncate:200}</a>  ({$r->count})
                     <br>od <i>{$r->opener}</i>
-                <td class="date" title="Poslední zpráva z {$r->last_date|date:'j.n. H:i:s'}">{$r->last_date|timeago:'j.n.Y H:i'}
+                <td class="date" title="Zadnja poruka od {$r->last_date|date:'j.n. H:i:s'}">{$r->last_date|timeago:'j.n.Y H:i'}
         {/foreach}
     </table>
 
@@ -55,8 +55,8 @@
     {include #monthControls}
 
 
-    <p>Tento mirror je obnovován každých 5 minut.</p>
-    <p>Zdrojový archiv na mailserveru: <a href="http://lists.openstreetmap.org/pipermail/talk-ba">lists.openstreetmap.org/pipermail/talk-ba</a></p>
+    <p>Ovaj mirror se obnavlja svakih 5 minuta.</p>
+    <p>Izvorna arhiva na mail serveru: <a href="http://lists.openstreetmap.org/pipermail/talk-ba">lists.openstreetmap.org/pipermail/talk-ba</a></p>
 
 
 

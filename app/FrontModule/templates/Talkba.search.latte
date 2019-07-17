@@ -1,16 +1,16 @@
-{block title}[Talk-cz] Vyhledávání: {$query}{/block}
-{block map}{include #osmczmap}{/block}
+{block title}[Talk-ba] Pretraga: {$query}{/block}
+{block map}{include #osmbamap}{/block}
 
 {block content}
 <div class="container" n:snippet="content">
     {block monthList}
         <div class="pull-right margin-top-10">
-            <a class="ajax" n:href="default date(Ym)">&laquo; zpět</a> |
+            <a class="ajax" n:href="default date(Ym)">&laquo; nazad</a> |
             <select onchange="jQuery.nette.callUrl(this)">
-                <option>-- měsíc --</option>
+                <option>-- mjesec --</option>
                 {foreach $monthList as $m}
                 <option value="{link default $m->ym}">
-                    {$m->date|date:n|czechMonth} {$m->date|date:Y} ({$m->count})
+                    {$m->date|date:n|strMonth} {$m->date|date:Y} ({$m->count})
                 </option>
                 {/foreach}
             </select>
@@ -27,17 +27,17 @@
         </div><!-- /input-group -->
     </form>
     <p>
-        <i>Pozn.: Toto vyhledávání je velmi "beta". Hledá se v celém textu mailu včetně citovaných částí.</i>
-    <p>Zkuste raději:
-        <a href="https://www.google.cz/search?as_sitesearch=https://openstreetmap.cz/talkba&as_q={$query}" class="btn btn-default btn-mini">Prohledat tento archiv Googlem</a>
+        <i>Napomena: Ova pretraga je veoma "beta". Pretražuje se sav tekst uključujući i citirane dijelove.</i>
+    <p>Bolje probajte:
+        <a href="https://www.google.ba/search?as_sitesearch=https://openstreetmap.ba/talkba&as_q={$query}" class="btn btn-default btn-mini">Pretražiti ovu arhivu pomoću Googlea</a>
 
 
     {if !$count}
-    <div class="alert alert-warning">Nenalezeny žádné výsledky.</div>
+    <div class="alert alert-warning">Nisu pronađeni nikakvi rezultati.</div>
     {/if}
 
 
-    <p n:if="$count > 500" class="alert alert-info">Nalezeno více než 500 výsledků, zobrazeno prvních 500.</p>
+    <p n:if="$count > 500" class="alert alert-info">Pronađeno je više od 500 rezultata, prikazano prvih 500.</p>
 
     <div class="mailarchive search">
         {foreach $results as $result}
@@ -54,10 +54,10 @@
                         <h3> <a class="ajax" n:href="author $template->talkstub($r->from)">{$r->name ?: 'N/A'}</a></h3>
                         &lt;{$r->from|replace:"@":" at "}&gt;
                         <br>
-                        <span class="stat" title="Počet příspěvků v konferenci talk-ba"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>{$r->talk_cz_mails}</span>
+                        <span class="stat" title="Broj postova u konferenciji talk-ba"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>{$r->talk_cz_mails}</span>
                         {if $r->username}
                             {* <h3> <a class="ajax" n:href="author $template->talkstub($r->from)">{$r->fullname}</a></h3> *}
-                            <span class="stat" title="Počet changesetů na osm.org (účet {$r->username} vytvořen {$r->account_created|date:'j.n.Y'})"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>{$r->changesets}</span>
+                            <span class="stat" title="Broj setova izmjena na osm.org (nalog {$r->username} kreiran {$r->account_created|date:'j.n.Y'})"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>{$r->changesets}</span>
                         {/if}
 
                     </div>
@@ -70,7 +70,7 @@
         {/foreach}
     </div>
     <hr>
-    <p n:if="$count > 500" class="alert alert-info">Nalezeno více než 500 výsledků, zobrazeno prvních 500.</p>
+    <p n:if="$count > 500" class="alert alert-info">Pronađeno više od 500 rezultata, prikazano prvih 500.</p>
 
     {include #monthList}
 

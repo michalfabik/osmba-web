@@ -45,14 +45,14 @@ class Front_LivePresenter extends Front_BasePresenter
   {
     $form = new AppForm();
     $form->elementPrototype->class('ajax');
-    $text = $form->addTextarea('text', 'Zpráva:')->controlPrototype;
-    $form->addSubmit('send', 'Odeslat');
+    $text = $form->addTextarea('text', 'Poruka:')->controlPrototype;
+    $form->addSubmit('send', 'Pošalji');
     $form->onSuccess[] = callback($this, 'postFormSubmitted');
     $form->renderer->wrappers["error"]["container"] = null;
     $form->renderer->wrappers["error"]["item"] =
       "div class='alert alert-error'";
 
-    $text->title = "Odkaz končí mezerou";
+    $text->title = "Link se završava razmakom";
     $text->style['width'] = "690px";
     $text->style['height'] = "30px";
     return $form;
@@ -75,18 +75,18 @@ class Front_LivePresenter extends Front_BasePresenter
   public function createComponentUserForm()
   {
     $form = new AppForm();
-    $form->addText('osm', 'OSM účet:');
+    $form->addText('osm', 'OSM nalog:');
     $form
       ->addText('mail', 'E-mail:') //->setRequired()
       //->addRule(Form::EMAIL)
-      ->setOption('description', '(neveřejné)');
-    $form->addText('gc', 'GC přezdívka:');
-    $form->addText('fullname', 'Vzkaz ostatním:');
+      ->setOption('description', '(nije za javnost)');
+    $form->addText('gc', 'GC nadimak:');
+    $form->addText('fullname', 'Poruka ostalima:');
     $form
-      ->addText('poznamka', 'Zpětná vazba:')
-      ->setOption('description', '(neveřejné)');
+      ->addText('poznamka', 'Feedback:')
+      ->setOption('description', '(nije za javnost)');
 
-    $form->addSubmit('login', 'Uložit');
+    $form->addSubmit('login', 'Spasi');
     $form->onSuccess[] = callback($this, 'userFormSubmitted');
 
     $form->renderer->wrappers["error"]["container"] = null;
@@ -100,14 +100,14 @@ class Front_LivePresenter extends Front_BasePresenter
     dibi::update('live_users', $form->values)
       ->where('user_id=%i', $this->liveuser->id)
       ->execute();
-    $this->flashMessage("Uloženo");
+    $this->flashMessage("Spašeno");
     $this->redirect("default");
   }
 
   public function actionLogout()
   {
     $this->liveuser->data = false;
-    $this->flashMessage("Odhlášení proběhlo úspěšně");
+    $this->flashMessage("Uspješno ste odjavljeni");
     $this->redirect("login");
   }
 
@@ -115,9 +115,9 @@ class Front_LivePresenter extends Front_BasePresenter
   {
     $form = new AppForm();
     $form
-      ->addText('nick', 'Přezdívka: ')
-      ->addRule(Form::FILLED, 'Vyplňte prosím uživatelské jméno.');
-    $form->addSubmit('login', 'Přihlásit se')->getControlPrototype()->class =
+      ->addText('nick', 'Nadimak: ')
+      ->addRule(Form::FILLED, 'Molimo da popunite korisničko ime.');
+    $form->addSubmit('login', 'Prijavi se')->getControlPrototype()->class =
       'btn btn-primary margin-top-10 space-2em';
     $form->onSuccess[] = callback($this, 'loginFormSubmitted');
 
@@ -142,7 +142,7 @@ class Front_LivePresenter extends Front_BasePresenter
       $user = dibi::fetch('SELECT * FROM live_users WHERE name = %s', $nick);
     } elseif ($user->isonline) {
       $form->addError(
-        'Uživatel s tímto jménem již je online, zvolte si jiné. Pokud jste omylem zavřeli okno, počkejte 30 vteřin.'
+        'Ovo korisničko ime je već zauzeto, izaberite drugo. Ako ste greškom zatvorili prozor, sačekajte 30 sekundi.'
       );
       return;
     }

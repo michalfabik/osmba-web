@@ -7,7 +7,7 @@
         {var $year = $cr->format('Y')}
         <h4 id="y{$year}" class="jumptarget">
           {$year}
-          <a href="#y{$year}" onclick="$(this).parent().next().toggle()" class="small" n:if="$iterations">zobrazit &raquo;</a>
+          <a href="#y{$year}" onclick="$(this).parent().next().toggle()" class="small" n:if="$iterations">prikazati &raquo;</a>
         </h4>
         <table class="table tweets" {if $iterations}style="display: none"{/if}>
             <colgroup>
@@ -28,9 +28,9 @@
                         <time>{$t[created_at]|date:'j.n.Y'}</time>
                     </a>
                     <!--
-                    <a href="https://twitter.com/intent/tweet?in_reply_to={$t[id_str]}" title="Odpovědět" target="_blank"><span class="glyphicon glyphicon-share-alt"></span></a>
-                    <a href="https://twitter.com/intent/retweet?tweet_id={$t[id_str]}" title="Retweetnout" target="_blank"><span class="glyphicon glyphicon-retweet"></span> {$t[retweet_count]>0 ? $t[retweet_count]}</a>
-                    <a href="https://twitter.com/intent/like?tweet_id={$t[id_str]}" title="Lajknout" target="_blank"><span class="glyphicon glyphicon-heart"></span> {$t[favorite_count]>0 ? $t[favorite_count]}</a>
+                    <a href="https://twitter.com/intent/tweet?in_reply_to={$t[id_str]}" title="Odgovoriti" target="_blank"><span class="glyphicon glyphicon-share-alt"></span></a>
+                    <a href="https://twitter.com/intent/retweet?tweet_id={$t[id_str]}" title="Retweet" target="_blank"><span class="glyphicon glyphicon-retweet"></span> {$t[retweet_count]>0 ? $t[retweet_count]}</a>
+                    <a href="https://twitter.com/intent/like?tweet_id={$t[id_str]}" title="Sviđa mi se" target="_blank"><span class="glyphicon glyphicon-heart"></span> {$t[favorite_count]>0 ? $t[favorite_count]}</a>
                     -->
                 </div>
             {/define}

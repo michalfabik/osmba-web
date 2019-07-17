@@ -70,9 +70,9 @@ class Helpers
       $out[] = "</div>";
     }
 
-    //---------- Původní zpráva ----------
+    //---------- Izvorna poruka ----------
     //Od: ..
-    //Komu: ..
+    //Kome: ..
     //Datum: ..
     $opened = false;
     for ($i = 0; $i < count($out); $i++) {
@@ -154,25 +154,25 @@ class Helpers
           self::plural(round($delta / 60), 'hodina', 'hodiny', 'hodin');
       }
       if ($delta < 2880) {
-        return 'zítra';
+        return 'sutra';
       }
       if ($delta < 43200) {
         return 'za ' .
           round($delta / 1440) .
           ' ' .
-          self::plural(round($delta / 1440), 'den', 'dny', 'dní');
+          self::plural(round($delta / 1440), 'dan', 'dana', 'dana');
       }
       if ($delta < 86400) {
-        return 'za měsíc';
+        return 'za mjesec dana';
       }
       if ($delta < 525960) {
         return 'za ' .
           round($delta / 43200) .
           ' ' .
-          self::plural(round($delta / 43200), 'měsíc', 'měsíce', 'měsíců');
+          self::plural(round($delta / 43200), 'mjesec dana', 'mjeseca', 'mjeseci');
       }
       if ($delta < 1051920) {
-        return 'za rok';
+        return 'za godinu dana';
       }
       return 'za ' .
         round($delta / 525960) .
@@ -182,36 +182,66 @@ class Helpers
 
     $delta = round($delta / 60);
     if ($delta == 0) {
-      return 'před okamžikem';
+      return 'prije manje od jedne minute';
     }
     if ($delta == 1) {
-      return 'před minutou';
+      return 'prije jedne minute';
     }
     if ($delta < 45) {
-      return "před $delta minutami";
+        if ($delta > 10 && $delta < 15) {
+          return 'prije ' . $delta . ' minuta';
+        }
+        return 'prije ' .
+          $delta .
+          ' ' .
+          self::plural($delta % 10, 'minute', 'minuta', 'minuta');
     }
     if ($delta < 90) {
-      return 'před hodinou';
+      return 'prije sat vremena';
     }
     if ($delta < 1440) {
-      return 'před ' . round($delta / 60) . ' hodinami';
+        $hours = round($delta / 60);
+        if ($hours > 10 && $hours < 15) {
+          return 'prije ' . $hours . ' sati';
+        }
+        return 'prije ' .
+          $hours .
+          ' ' .
+          self::plural($hours % 10, 'sat', 'sata', 'sati');
     }
     if ($delta < 2880) {
-      return 'včera';
+      return 'juče';
     }
     if ($delta < 43200) {
-      return 'před ' . round($delta / 1440) . ' dny';
+      $days = round($delta / 1440);
+        if ($days > 10 && $days < 15) {
+          return 'prije ' . $days . ' dana';
+        }
+        return 'prije ' .
+          $days .
+          ' ' .
+          self::plural($days % 10, 'dan', 'dana', 'dana');
     }
     if ($delta < 86400) {
-      return 'před měsícem';
+      return 'prije mjesec dana';
     }
     if ($delta < 525960) {
-      return 'před ' . round($delta / 43200) . ' měsíci';
+      return 'prije ' .
+        round($delta / 43200) .
+        ' ' .
+        self::plural(round($delta / 43200), 'mjesec', 'mjeseca', 'mjeseci');
     }
     if ($delta < 1051920) {
-      return 'před rokem';
+      return 'prije godinu dana';
     }
-    return 'před ' . round($delta / 525960) . ' lety';
+    $years = round($delta / 525960);
+    if ($years % 100 > 10 && $years % 100 < 15) {
+      return 'prije ' . $years . ' godina';
+    }
+    return 'prije ' .
+      $years .
+      ' ' .
+      self::plural($years % 10, 'godinu', 'godine', 'godina');
   }
 
   /**
