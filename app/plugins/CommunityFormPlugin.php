@@ -30,7 +30,7 @@ class CommunityFormPlugin extends AppForm
     $this->addText('username', 'OSM.org username')->setDisabled();
 
     $this->addText('fullname', 'Ime i prezime')
-      ->setOption('description', 'Da se zna ko je ko!')
+      ->setOption('description', 'Da se možemo prepoznati.')
       ->addRule(Form::FILLED, '%label nije popunjeno.')
       ->addRule(Form::MIN_LENGTH, '%label mora imati najmanje 5 znakova.', 5);
 
@@ -76,13 +76,13 @@ class CommunityFormPlugin extends AppForm
     $this->addMultiSelect('projects', 'Projekti', $this->projects)
       ->setOption(
         'description',
-        '(nije obavezno) Stranicu projekta je moguće dodati u administraciji. Eventualno javite na dev@openstreetmap.ba'
+        '(nije obavezno) Stranicu projekta je moguće dodati u administraciji, ili možete javiti na dev@openstreetmap.ba'
       )
       ->getControlPrototype()->style = 'height:150px;width:40%';
 
     $this->addCheckbox('public', 'Objaviti podatke na openstreetmap.ba');
 
-    $this->addSubmit('submit', 'Sačuvaj podatke');
+    $this->addSubmit('submit', 'Sačuvati podatke');
     $this->onSuccess[] = callback($this, 'submitted');
 
     $renderer = $this->getRenderer();

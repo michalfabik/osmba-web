@@ -172,7 +172,7 @@ class Helpers
           self::plural(round($delta / 43200), 'mjesec dana', 'mjeseca', 'mjeseci');
       }
       if ($delta < 1051920) {
-        return 'za rok';
+        return 'za godinu dana';
       }
       return 'za ' .
         round($delta / 525960) .
@@ -242,7 +242,6 @@ class Helpers
       $years .
       ' ' .
       self::plural($years % 10, 'godinu', 'godine', 'godina');
-    return 'prije ' . round($delta / 525960) . ' godina';
   }
 
   /**
