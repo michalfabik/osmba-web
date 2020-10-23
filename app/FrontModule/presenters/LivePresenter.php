@@ -1,9 +1,15 @@
 <?php
 
+namespace FrontModule;
+
+
+use dibi;
+use Nette\Application\UI\Form;
+
 /**
  * For workshop attendants
  */
-class Front_LivePresenter extends Front_BasePresenter
+class LivePresenter extends BasePresenter
 {
   private $liveuser;
 
@@ -43,7 +49,7 @@ class Front_LivePresenter extends Front_BasePresenter
 
   public function createComponentPostForm()
   {
-    $form = new AppForm();
+    $form = new Form();
     $form->elementPrototype->class('ajax');
     $text = $form->addTextarea('text', 'Poruka:')->controlPrototype;
     $form->addSubmit('send', 'Pošalji');
@@ -74,7 +80,7 @@ class Front_LivePresenter extends Front_BasePresenter
 
   public function createComponentUserForm()
   {
-    $form = new AppForm();
+    $form = new Form();
     $form->addText('osm', 'OSM nalog:');
     $form
       ->addText('mail', 'E-mail:') //->setRequired()
@@ -113,7 +119,7 @@ class Front_LivePresenter extends Front_BasePresenter
 
   public function createComponentLoginForm()
   {
-    $form = new AppForm();
+    $form = new Form();
     $form
       ->addText('nick', 'Nadimak: ')
       ->addRule(Form::FILLED, 'Molimo da popunite korisničko ime.');
