@@ -6,7 +6,7 @@ use dibi;
 use Nette\Application\BadRequestException;
 use Nette\DateTime;
 
-class Front_TalkbaPresenter extends Front_BasePresenter
+class TalkbaPresenter extends BasePresenter
 {
   public function startup()
   {
