@@ -9,7 +9,7 @@
 common:
     nette:
         debugger:
-            email: zbytovsky@gmail.com
+            email: tomas.kasparek@gmail.com
 
     parameters:
     
@@ -26,8 +26,8 @@ common:
 
         plugins:
             - OsmAuthPlugin
-            - TwitterPlugin
             - CommunityFormPlugin
+            - TwitterPlugin
 
         macros:
             gallery: 			%appDir%/macros/gallery.latte
