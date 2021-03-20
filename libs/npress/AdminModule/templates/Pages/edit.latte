@@ -4,7 +4,7 @@
 			{if $p=$page->lang($l)}
 				<a n:href="this lang=>$l" n:class="$lang==$l? bold" title="{$p->name}">{$l}</a>
 			{else}
-				<a n:href="this#newpage lang=>$l, from=>$lang" title="vytvořit jazykovou mutaci">{$l}*</a>
+				<a n:href="this#newpage lang=>$l, from=>$lang" title="kreirati verziju na drugom jeziku">{$l}*</a>
 			{/if}
 		{/foreach}
 	</div>
@@ -17,28 +17,28 @@
 	<p class="pull-right">
 		<a n:href='Pages:edit $page->getParent()->id' class='small'>složka {$page->getParent()->name}</a>
 	</p>
-	<h2>Editace {if $x=='shop'}produktu{else}příspěvku{/if}</h2>
+	<h2>Uređivanje {if $x=='shop'}proizvoda{else}objave{/if}</h2>
 {elseif $x=$page->getMeta('.category')}
-	<h2>Editace {if $x=='shop'}kategorie{else}složky příspěvků{/if}</h2>
+	<h2>Uređivanje {if $x=='shop'}kategorije{else}fascikle objava{/if}</h2>
 {else}
-	<h2>Editace stránky</h2>
+	<h2>Uređivanje stranice</h2>
 {/if}
 </div>
 
 {* permissions *}
 {if !$presenter->triggerStaticEvent('allow_page_edit', $presenter, $page->id)}
-		<p class="alert alert-error"><strong>Nemáte oprávnění editovat tuto stránku</strong>.</p>
+		<p class="alert alert-error"><strong>Nemate ovlaštenje uređivati ovu stranicu</strong>.</p>
 {/if}
 
 
 
 {snippet editform_deleted}
 	{if $page->data[deleted]}
-		<p class="alert alert-error"><i class="icon-trash"></i> <strong>Tato stránka je smazaná</strong>, ale můžete to <a n:href="deletePage! 1" class='ajax'>vzít zpět</a>.</p>
+		<p class="alert alert-error"><i class="icon-trash"></i> <strong>Ova stranica je izbrisana</strong>, ali je možete <a n:href="deletePage! 1" class='ajax'>vratiti</a>.</p>
 
 		{var $living = $page->getFirstLivingParent()}
-		<p>Stránka bude obnovena pod stránku: <a n:href="edit $living->id">{$living->name}</a>
-		{if $page->id_parent != $living->id} - původní rodičovská stránka je pravděpodobně smazaná{/if}
+		<p>Stranica će biti obnovljena ispod stranice: <a n:href="edit $living->id">{$living->name}</a>
+		{if $page->id_parent != $living->id} - izvorna roditeljska stranica je vjerovatno izbrisana{/if}
 
 		<div id="deletedOverlay"></div>
 		<script></script>
@@ -61,7 +61,7 @@
 	<div class="control-group">
 		{label published "class"=>"control-label" /}
 		<div class="controls"><div class="input-prepend"><span class="add-on">{input published}</span></div>
-		<p n:class="help-inline, $page->published?hide" id="js-published-helper"><small>Tato stránka se nebude zobrazovat v menu, lze na ni jen odkázat</small>
+		<p n:class="help-inline, $page->published?hide" id="js-published-helper"><small>Ova stranica neće biti prikazana u meniju, pristup je moguć samo putem linka</small>
 	</div></div>
 
 	<div class="control-group">
@@ -71,7 +71,7 @@
         <span class="add-on"><i class="icon-wrench"></i></span
 				>{$presenter['pageEditForm']['seoname']->control}
 			</div>
-			<p class="help-inline"><a href="{$page->link()}" rel="tooltip" title="{$page->link(true)}" class="btn btn-success">zobrazit na webu</a>
+			<p class="help-inline"><a href="{$page->link()}" rel="tooltip" title="{$page->link(true)}" class="btn btn-success">prikazati na sajtu</a>
 	</div></div>
 
 
@@ -79,23 +79,23 @@
 	{? $presenter->triggerEvent_filter('filterPageEditForm_render', $_form)}
 
 	<div id="js-linkhelp" class="jshidden">
-		<p>Adresa stránky začíná / <small>(např.: <b>/kontakt</b>)</small>
-		<p class="spacer">Přesměrování vypadá takto:
+		<p>Adresa stranice počinje sa / <small>(npr.: <b>/kontakt</b>)</small>
+		<p class="spacer">Preusmjerenje izgleda ovako:
 		<ul>
-			<li><b>http://google.com</b> - menu odkazuje na jiný web
-			<li><b>#-p27-#</b> - menu odkazuje na jinou stránku, s ID# 27
-			<li><b>#-f191-#</b> - menu odkazuje na stažení souboru, s ID# 191
+			<li><b>https://duckduckgo.com</b> - meni upućuje na drugi sajt
+			<li><b>#-p27-#</b> - meni upućuje na drugu stranicu sa ID-om #27
+			<li><b>#-f191-#</b> - meni upućuje na preuzimanje fajla sa ID-om #191
 		</ul>
 	</div>
 
 	<div id="js-texteditor">
 	{if $page->getMeta('.category') || $page->getMeta('.hideTextInput')}
-		<p>obsah stránky: <a href="#" onclick="$(this).parent().next().toggle(200);return false">zobrazit editační pole</a>
+		<p>sadržaj stranice: <a href="#" onclick="$(this).parent().next().toggle(200);return false">prikazati polje za uređivanje</a>
 		<div class="jshidden">
 			 {input text rows=>10}
 		</div>
 	{else}
-		<p class="pull-right"><small><i class="icon-info-sign"></i> nový řádek: Shift+Enter</small>
+		<p class="pull-right"><small><i class="icon-info-sign"></i> novi red: Shift+Enter</small>
 		<p>{label text /}
 			 {input text rows=>10,style=>"width:100%;height:300px"}
 	{/if}
@@ -104,7 +104,7 @@
 
 	<div class="form-actions">
 		{input submit1 class=>"btn btn-primary btn-large", title=>"Ctrl + s"}
-		<a n:href="deletePage!" class='ajax del' title="vyhodí do koše i všechny podstránky">smazat</a>
+		<a n:href="deletePage!" class='ajax del' title="uključujući i sve podstranice">smazat</a>
 	</div>
 {/form}
 
@@ -114,20 +114,20 @@
 
 
 {if $page->getMeta('.category') == 'yes'}
-<h2 id="toc-subpages">výpis článků: <a n:href='add $page->id' class='small btn btn-info'>+ přidat</a></h2>
+<h2 id="toc-subpages">spisak članaka: <a n:href='add $page->id' class='small btn btn-info'>+ dodati</a></h2>
 <ul id="js-subpageslist" data-sortlink='{link subpagessort!}'>
 {foreach $page->getChildNodes() as $r}
 	<li id='pageid-{$r->id}'>{if !$r[published]}<img src="{$basePath}/static/images/iconEyeNo.png">{/if}
 		<a href="{link Pages:edit $r->id}">{$r->name}</a>
 {/foreach}
 </ul>
-<p>Tahem myší můžete změnit pořadí článků.
+<p>Mišom možete promijeniti redoslijed članaka.
 {/if}
 
 {? $presenter->triggerEvent('renderAdminList')}
 
 
-<h2 id='toc-files'>přílohy:</h2>
+<h2 id='toc-files'>prilozi:</h2>
 {control npFilesControl}
 
 			

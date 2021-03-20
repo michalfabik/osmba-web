@@ -7,7 +7,7 @@
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	<meta name="generator" content="{!NPRESS|striptags}">
 
-	<title>{$config[webTitle]} &ndash; Administrace</title>
+	<title>{$config[webTitle]} &ndash; Administracija</title>
 
 	<link rel="stylesheet" href="{$basePath}/static/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="{$basePath}/static/screen.css" type="text/css">
@@ -36,10 +36,10 @@
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a n:href="Admin:logout">odhlásit</a></li>
+				<li><a n:href="Admin:logout">odjava</a></li>
                 <!--
 				<li class="divider"></li>
-				<li class="inline">Jazyk administrace:<br /> <a href="#">cs</a> / <a href="#">en</a></li>
+				<li class="inline">Jezik administracije:<br /> <a href="#">bs</a> / <a href="#">en</a></li>
 				-->
 			</ul>
 		</div>
@@ -67,10 +67,10 @@
 		<div id='flashes'><div class='box' n:snippet="flashes">
 			<div n:foreach="$flashes as $flash" class="flash alert">
 				{$flash->message}
-				<a href='{$flash->undolink}' n:if="isset($flash->undolink)" class="ajax">vzít zpět</a>
+				<a href='{$flash->undolink}' n:if="isset($flash->undolink)" class="ajax">vratiti</a>
 			</div>
 			&nbsp;
-			<script>window.setTimeout(function(){ $('#flashes div div').fadeOut(8000); }, 5000);</script> {* za 5sec už je $ inicializován *}
+			<script>window.setTimeout(function(){ $('#flashes div div').fadeOut(8000); }, 5000);</script> {* $ je učitan za 5s *}
 		</div></div>
 
 	 </div>
@@ -87,15 +87,15 @@
 
 		<!-- pages menu edit buttons -->
 		<div class="btn-group pull-right spacer spacerr">
-			<button id="js-menu-reordering" class="btn btn-mini btn-info" data-toggle="button">upravit</button>
+			<button id="js-menu-reordering" class="btn btn-mini btn-info" data-toggle="button">uredi</button>
 
 			<a class="btn btn-mini btn-info dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-plus icon-white" style="height:13px"></i></a>
 			<ul class="dropdown-menu">
-				<li><a n:href="Pages:add $presenter->getParam('id_page'),1">přidat stránku</a></li>
-				<li><a n:href="Pages:add $presenter->getParam('id_page')">přidat podstránku</a></li>
+				<li><a n:href="Pages:add $presenter->getParam('id_page'),1">dodati stranicu</a></li>
+				<li><a n:href="Pages:add $presenter->getParam('id_page')">dodati podstranicu</a></li>
 				{foreach PagesModel::getPagesByMeta('.category','yes') as $r}
 					{first}<li class="divider"></li>{/first}
-					<li><a n:href="Pages:add $r->id">přidat do {$r->name}</a></li>
+					<li><a n:href="Pages:add $r->id">dodati u {$r->name}</a></li>
 				{/foreach}
 			</ul>
 		</div>
@@ -124,11 +124,11 @@
 
 
 		<ul class="nav nav-list spacer">
-			<li class="nav-header">Nastavení</li>
-			<li><a n:href="Pages:trash"><i class="icon-trash"></i> Koš stránek</a>
-			{* <li><a>Nastavení</a> *}
-			<li><a n:href="Redirect:"><i class="icon-random"></i> Přesměrování</a>
-			<li n:if="count($langs)>1"><a n:href="Translations:"><i class="icon-globe"></i> Překlady</a></li>
+			<li class="nav-header">Postavke</li>
+			<li><a n:href="Pages:trash"><i class="icon-trash"></i> Korpa stranica</a>
+			{* <li><a>Postavke</a> *}
+			<li><a n:href="Redirect:"><i class="icon-random"></i> Preusmjerenje</a>
+			<li n:if="count($langs)>1"><a n:href="Translations:"><i class="icon-globe"></i> Prevodi</a></li>
 			{foreach $adminMenu as $link=>$txt}
 				<li><a href="{$link}">{!$txt}</a></li>
 			{/foreach}
