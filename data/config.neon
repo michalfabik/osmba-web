@@ -24,7 +24,7 @@ common:
 
 	
 		npress:											
-			webTitle: "OpenStreetMap.cz"
+			webTitle: "OpenStreetMap.ba"
 			adminPassword: 
 			analytics:      # google analytics tracking number (like UA-123-1) 
 			clicky:
