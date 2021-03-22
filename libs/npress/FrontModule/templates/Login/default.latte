@@ -1,7 +1,7 @@
 {var robots => noindex}
-{block #title}Přihlášení{/block}
+{block #title}Prijava{/block}
 {block #content}
-<h2>Přihlásit se</h2>
+<h2>Prijava</h2>
 
 <div n:foreach="$flashes as $flash" class="flash alert zprava">
 	{$flash->message}
@@ -10,6 +10,6 @@
 {? $presenter->triggerEvent('login_motd')}
 
 {control loginForm}
-{* <a href="{link Login:lostPass}">Zapomněli jste heslo?</a> *}
+{* <a href="{link Login:lostPass}">Zaboravili ste šifru?</a> *}
 
 

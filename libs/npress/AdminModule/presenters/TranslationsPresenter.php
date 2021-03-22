@@ -37,7 +37,7 @@ class TranslationsPresenter extends BasePresenter
     TranslationsModel::delete($id);
 
     $this->template->translations = TranslationsModel::getAll();
-    $this->flashMessage("Překlad smazán"); //TODO undolink
+    $this->flashMessage("Prevod izbrisan"); //TODO undolink
     $this->invalidateControl('translationstable');
 
     if (!$this->isAjax()) {
@@ -59,7 +59,7 @@ class TranslationsPresenter extends BasePresenter
     $form->getElementPrototype()->class('ajax');
 
     $form->addHidden('id');
-    $form->addText('key', 'Klíč');
+    $form->addText('key', 'Ključ');
 
     foreach ($this->context->params["langs"] as $l => $txt) {
       $form->addText($l, $txt);
@@ -76,7 +76,7 @@ class TranslationsPresenter extends BasePresenter
     TranslationsModel::replace($values);
 
     $this->template->translations = TranslationsModel::getAll();
-    $this->flashMessage('Překlad přidán/upraven');
+    $this->flashMessage('Prevod dodat/promijenjen');
     $this->invalidateControl('translationstable');
     $form->setValues(array(), true);
 

@@ -32,7 +32,7 @@ class PagesPresenter extends BasePresenter
       return true;
     }
 
-    $this->flashMessage('Nedostatečné oprávnění pro editaci této stránky.');
+    $this->flashMessage('Nedovoljna ovlaštenja za uređivanje ove stranice.');
     if (!$this->isAjax()) {
       if ($this->action == 'add') {
         $this->redirect('Admin:');
@@ -133,18 +133,18 @@ class PagesPresenter extends BasePresenter
 
     $form->addHidden("id_page");
 
-    $form->addText("heading", "nadpis");
-    $form->addText("name", "v menu");
+    $form->addText("heading", "naslov");
+    $form->addText("name", "u meniju");
     $form
       ->addText("seoname", "adresa")
-      ->setAttribute('placeholder', '(automatická)');
+      ->setAttribute('placeholder', '(automatski)');
 
-    $form->addCheckbox("published", "publikováno");
+    $form->addCheckbox("published", "objavljeno");
 
-    $form->addTextArea("text", "obsah stránky");
+    $form->addTextArea("text", "sadržaj stranice");
     $form['text']->getControlPrototype()->class('textarea');
 
-    $form->addSubmit("submit1", "Uložit");
+    $form->addSubmit("submit1", "Sačuvaj");
     $form->onSuccess[] = callback($this, 'pageEditFormSubmitted');
 
     //add additional inputs
@@ -197,7 +197,7 @@ class PagesPresenter extends BasePresenter
     //save values
     unset($values['id_page']);
     $this->page->save($values);
-    $this->flashMessage('Obsah stránky uložen (' . date('y-m-d H:i:s') . ')');
+    $this->flashMessage('Sadržaj stranice sačuvan (' . date('y-m-d H:i:s') . ')');
 
     if (!$this->isAjax()) {
       $this->redirect('this');
@@ -230,7 +230,7 @@ class PagesPresenter extends BasePresenter
       $this->page->delete();
     }
 
-    $this->flashMessage($undo ? "Stránka navrácena zpět" : "Stránka smazána");
+    $this->flashMessage($undo ? "Stranica vraćena među objavljene" : "Stranica izbrisana");
     $this->invalidateControl('editform_deleted');
     $this->invalidateControl('menu');
     if (!$this->isAjax()) {
@@ -246,7 +246,7 @@ class PagesPresenter extends BasePresenter
     }
 
     PagesModel::sort($this->getHttpRequest()->post['pageid'], $this->lang);
-    $this->flashMessage("Pořadí článků upraveno");
+    $this->flashMessage("Redoslijed članaka promijenjen");
     //$this->payload->hack = 'ok';
   }
 

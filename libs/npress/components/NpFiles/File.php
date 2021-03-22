@@ -714,7 +714,7 @@ class DocumentFile extends File
     $link = Environment::getApplication()
       ->getPresenter()
       ->link(':Front:Files:preview', $this->id);
-    return "Počet stránek: " .
+    return "Broj stranica: " .
       substr($this->info, 0, 5) .
       "<br><a href='$link'>preview</a>";
   }
@@ -838,8 +838,8 @@ class VideoFile extends File
     }
 
     return "\n<video src='$link' width='480' height='330' poster='$preview' preload='none'>\n" .
-      "Pokud vidíte tento text, váš prohlížeč zřejmě neumí přehrávat video.\n" .
-      "<br>Video můžete alespoň <a href='$link'>stáhnout</a> a zkusit ho přehrát mimo prohlížeč.\n" .
+      "Ukoliko vidite ovaj tekst, vaš preglednik vjerovatno ne podržava video.\n" .
+      "<br>Možete <a href='$link'>preuzeti video fajl</a> za upotrebu u eksternom programu.\n" .
       "</video>\n";
     //TODO proč nefunguje downloadLink??
     //TODO dát to do šablony

@@ -53,7 +53,7 @@ class MetaControl extends Control
     $val = $this->page->meta[$key];
     $this->page->deleteMeta($key);
 
-    $this->presenter->flashMessage("Nastavení smazáno ($key: $val)");
+    $this->presenter->flashMessage("Postavka je izbrisana");
     //$this->invalidateControl('editpage_metalist');
 
     $this->invalidateControl();
@@ -66,7 +66,7 @@ class MetaControl extends Control
   {
     $post = $this->parent->request->post;
     $this->page->addMeta($post['key'], $post['value']);
-    $this->presenter->flashMessage('Nastavení upraveno');
+    $this->presenter->flashMessage('Postavka je promijenjena');
 
     $this->invalidateControl();
     if (!$this->presenter->isAjax()) {
@@ -80,9 +80,9 @@ class MetaControl extends Control
     $form = new Form();
     $form->getElementPrototype()->class('ajax');
 
-    $form->addText('key', 'klíč')->getControlPrototype()->style = 'width:90px';
-    $form->addText('value', 'hodnota');
-    $form->addSubmit('submit1', 'Přidat');
+    $form->addText('key', 'ključ')->getControlPrototype()->style = 'width:90px';
+    $form->addText('value', 'vrijednost');
+    $form->addSubmit('submit1', 'Dodaj');
     $form->onSuccess[] = callback($this, 'metaAddFormSubmitted');
 
     return $form;
@@ -91,7 +91,7 @@ class MetaControl extends Control
   {
     $this->page->addMeta($form->values['key'], $form->values['value']);
 
-    $this->presenter->flashMessage('Nastavení přidáno');
+    $this->presenter->flashMessage('Postavka je dodata');
     //$this->invalidateControl('editpage_metalist');
     $form->setValues(array(), true);
 

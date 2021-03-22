@@ -32,13 +32,13 @@ abstract class BasePresenter extends \CommonBasePresenter
           new JsonResponse(array(
             "snippets" => array(
               "snippet--flashes" =>
-                "<div class=\"flash alert\">Nedostatečné oprávnění.</div>"
+                "<div class=\"flash alert\">Nedovoljna ovlaštenja.</div>"
             )
           ))
         ); //<script>window.setTimeout(function(){ $('#flashes div div').fadeOut(8000); }, 5000);</script>
         $this->terminate();
       }
-      throw new ForbiddenRequestException("Nedostatečné oprávnění.");
+      throw new ForbiddenRequestException("Nedovoljna ovlaštenja.");
     }
 
     //initialize admin

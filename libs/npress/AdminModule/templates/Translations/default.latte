@@ -1,14 +1,14 @@
 {block #content}
 
-<h2>Překlady</h2>
+<h2>Prevodi</h2>
 
-<p>Zde se nachází překlady statických textů (pro překlad stránky zvolte jazyk vpravo nahoře a vyberte stránku v menu).
-<p>Pokud překlad není vyplněn bude zobrazen Interní klíč
+<p>Ovdje se nalaze prevodi statičkih tekstova (za prevod stranice izaberite jezik gore desno stranicu u meniju).
+<p>Ukoliko prevod nije popunjen, prikazaće se Interni ključ
 
 {snippet translationstable}
 	{form translationsEditForm}
 	<table class="table table-bordered table-striped">
-		<tr><th>Interní klíč</th><th n:foreach="$langs as $l">{$l}</th><th></th></tr>
+		<tr><th>Interni ključ</th><th n:foreach="$langs as $l">{$l}</th><th></th></tr>
 		{foreach $translations as $r}
 			{if $editid == $r['id']}
 				<tr><td>{$r[key]} {input key}</td>
@@ -19,14 +19,14 @@
 				<tr>
 					<td>{$r[key]}
 					<td n:foreach="$langs as $l=>$txt">{$r[$l]}</td>
-					<td><a n:href="edit! $r['id']" class="ajax">upravit</a> <a n:href="delete! $r['id']" class="del ajax" onclick="confirm('opravdu?') || event.stopPropagation();return false">×</a>
+					<td><a n:href="edit! $r['id']" class="ajax">uredi</a> <a n:href="delete! $r['id']" class="del ajax" onclick="confirm('Jeste li sigurni') || event.stopPropagation();return false">×</a>
 					</tr>
 			{/if}
 		{/foreach}
 	</table>
 	{/form}
 
-	<h4>Přidat nový</h4>
+	<h4>Dodaj novi</h4>
 	{control translationsAddForm}
 {/snippet}
 

@@ -36,7 +36,7 @@ class RedirectPresenter extends BasePresenter
     $orig = $this->template->redirects[$id];
 
     $this->template->redirects = RedirectModel::getAll();
-    $this->flashMessage("Přesměrování smazáno ($orig[oldurl]->$orig[newurl])");
+    $this->flashMessage("Preusmjerenje je izbrisano ($orig[oldurl]->$orig[newurl])");
     $this->invalidateControl('redirecttable');
 
     if (!$this->isAjax()) {
@@ -56,8 +56,8 @@ class RedirectPresenter extends BasePresenter
     $form->getElementPrototype()->class('ajax');
 
     $form->addHidden('id');
-    $form->addText('oldurl', 'stará adresa');
-    $form->addText('newurl', 'nová adresa');
+    $form->addText('oldurl', 'stara adresa');
+    $form->addText('newurl', 'nova adresa');
     $form->addSubmit('submit1', 'OK');
     $form->onSuccess[] = callback($this, 'redirectEditFormSubmitted');
 
@@ -70,7 +70,7 @@ class RedirectPresenter extends BasePresenter
     RedirectModel::replace($values);
 
     $this->template->redirects = RedirectModel::getAll();
-    $this->flashMessage('Přesměrování přidáno/upraveno');
+    $this->flashMessage('Preusmjerenje dodato/promijenjeno');
     $this->invalidateControl('redirecttable');
     $form->setValues(array(), true);
 

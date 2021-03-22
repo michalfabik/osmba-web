@@ -3,21 +3,21 @@
 <div class="jshidden" n:tag-if="!isset($edit)">
 {control form}
 </div>
-<p n:if="!isset($edit)"><a href="#" onclick="$(this).parent().prev().show()">Přidat nový záznam</a></p>
+<p n:if="!isset($edit)"><a href="#" onclick="$(this).parent().prev().show()">Dodaj novi unos</a></p>
 
 
 	<p>{foreach $oddily as $id=>$name}<a href="#oddil-{$id}">{$name}</a>{sep} | {/sep}{/foreach}
-	<p>Zobrazit <a n:href="adresy!">adresy a pevné linky</a>
+	<p>Prikaži <a n:href="adresy!">adrese i brojeve fiksnih telefona</a>
 	<table n:class="border, !isset($adresy)?fullwidthtable">
 	<tr>
-		<th width="150">jméno</th>
-		<th width="90">přezdívka</th>
+		<th width="150">ime</th>
+		<th width="90">nick</th>
 		<th n:if="isset($adresy)">adresa</th>
-		<th n:if="isset($adresy)">pevná linka</th>
-		<th width="120">mobil</th>
+		<th n:if="isset($adresy)">fiksni telefon</th>
+		<th width="120">mobilni telefon</th>
 		<th width="210">e-mail</th>
-		<th class="hidden">oddíl</th>
-		<th>poznámka</th>
+		<th class="hidden">sekcija</th>
+		<th>napomena</th>
 	</tr>
 
 	{var $oddil = false}

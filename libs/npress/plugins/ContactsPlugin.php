@@ -72,18 +72,18 @@ class ContactsPlugin extends Control
     $form = new Form();
     $form->addHidden('id');
     $form
-      ->addText('jmeno', 'Jméno:')
-      ->setOption('description', 'Prázdné jméno smaže záznam.');
-    $form->addText('prezdivka', 'Přezdívka:');
+      ->addText('jmeno', 'Ime:')
+      ->setOption('description', 'Prazno ime će izbrisati unos.');
+    $form->addText('prezdivka', 'Nick:');
     $form->addText('adresa', 'Adresa:');
-    $form->addText('pevny_telefon', 'Pevná linka:');
+    $form->addText('pevny_telefon', 'Fiksni telefon:');
     $form
-      ->addText('mobilni_telefon', 'Mobil:')
-      ->setOption('description', 'STS přidejte nakonec do závorky');
+      ->addText('mobilni_telefon', 'Mobilni telefon:')
+      ->setOption('description', 'STS dodajte na kraj u zagradu');
     $form->addText('email', 'E-mail:');
-    $form->addSelect('oddil', 'Oddíl:', self::$oddily);
-    $form->addText('poznamka', 'Poznámka:');
-    $form->addSubmit('save', 'Uložit');
+    $form->addSelect('oddil', 'Sekcija:', self::$oddily);
+    $form->addText('poznamka', 'Napomena:');
+    $form->addSubmit('save', 'Sačuvaj');
     $form->onSuccess[] = callback($this, 'editFormSubmitted');
     return $form;
   }

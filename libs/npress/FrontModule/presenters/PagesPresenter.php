@@ -24,13 +24,13 @@ class PagesPresenter extends BasePresenter
     $this->page = \PagesModel::getPageById($id_page);
     if ($this->page === false) {
       throw new BadRequestException(
-        "Stránka nenalezena. (id=$id_page lang=$this->lang)"
+        "Stranica nije pronađena. (id=$id_page lang=$this->lang)"
       );
     }
 
     if ($this->page['deleted']) {
       throw new BadRequestException(
-        "Stránka smazána. (id=$id_page lang=$this->lang)"
+        "Stranica je bila izbrisana. (id=$id_page lang=$this->lang)"
       );
     }
 

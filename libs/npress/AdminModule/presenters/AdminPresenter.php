@@ -21,7 +21,7 @@ class AdminPresenter extends BasePresenter
         $this->getHttpRequest()->post['menuid'],
         $this->lang
       );
-      $this->flashMessage("Menu upraveno");
+      $this->flashMessage("Meni je promijenjen");
     }
     $this->setView('default');
   }
@@ -29,7 +29,7 @@ class AdminPresenter extends BasePresenter
   public function actionLogout()
   {
     $this->user->logout();
-    $this->flashMessage("Odhlášení proběhlo úspěšně");
+    $this->flashMessage("Uspješna odjava");
     $this->redirect(":Front:Login:");
   }
 }

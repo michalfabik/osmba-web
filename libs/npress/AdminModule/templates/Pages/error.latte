@@ -1,7 +1,7 @@
 {block content}
-<h2>Chybějící stránka</h2>
+<h2>Stranica ne postoji</h2>
 
-<p>Stránka id #{$error_id_page} v jazyce <b>{$langs[$error_lang]} ({$error_lang})</b> zatím nebyla vytvořena.
+<p>Stranica id #{$error_id_page} na jeziku <b>{$langs[$error_lang]} ({$error_lang})</b> još nije kreirana.
 <ul>
 {foreach $langs as $l=>$ltxt}
 	{var $pg = PagesModel::getPageById($error_id_page, $l)}
@@ -13,9 +13,9 @@
 					{sep} &raquo; {/sep}
 				{/foreach}
 			<p class="spacer offset1">
-			<a n:href="edit#newpage $error_id_page, from=>$l " class="btn btn-info">Vytvořit</a>
-			jako potomka
-			{if $parent->id == 0} první úrovně {else} <a n:href="edit $parent->id">{$parent->lang($l)->name}</a> {/if}
+			<a n:href="edit#newpage $error_id_page, from=>$l " class="btn btn-info">Kreiraj</a>
+			kao potomka
+			{if $parent->id == 0} prvog nivoa {else} <a n:href="edit $parent->id">{$parent->lang($l)->name}</a> {/if}
 	{else}
 	{/if}
 {/foreach}

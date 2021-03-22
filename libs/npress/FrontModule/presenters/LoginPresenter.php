@@ -27,13 +27,13 @@ class LoginPresenter extends BasePresenter
   {
     $form = new Form();
     $form
-      ->addText('username', 'Uživatelské jméno:')
-      ->addRule(Form::FILLED, 'Vyplňte prosím uživatelské jméno.');
+      ->addText('username', 'Korisničko ime:')
+      ->addRule(Form::FILLED, 'Molimo popunite korisničko ime.');
     $form
-      ->addPassword('password', 'Heslo:')
-      ->addRule(Form::FILLED, 'Vyplňte, prosím, heslo.');
-    $form->addCheckbox('remember', 'Trvale přihlásit na tomto počítači');
-    $form->addSubmit('login', 'Přihlásit se');
+      ->addPassword('password', 'Šifra:')
+      ->addRule(Form::FILLED, 'Molimo popunite šifru..');
+    $form->addCheckbox('remember', 'Trajna prijava na ovom računaru');
+    $form->addSubmit('login', 'Prijava');
     $form->onSuccess[] = callback($this, 'loginFormSubmitted');
 
     return $form;
@@ -65,11 +65,11 @@ class LoginPresenter extends BasePresenter
 		$usersModel = new UsersModel();
 
 		$form = new AppForm;
-		$form->addText('email', 'E-mail kontaktní osoby:')
-			->addRule(Form::FILLED, 'Vyplňte prosím e-mail kontaktní osoby.')
-			->addRule(array($usersModel, 'isExistingEmail'), 'Tento e-mail nemáme v databázi. Pokud si nejste jisti, prosíme, kontaktujte nás.');
+		$form->addText('email', 'E-mail kontakt osobe:')
+			->addRule(Form::FILLED, 'Molimo popunite e-mail kontakt osobe.')
+			->addRule(array($usersModel, 'isExistingEmail'), 'Ovaj e-mail nemamo u bazi podataka. Ukoliko niste sigurni, molimo da nas kontaktirate..');
 
-		$form->addSubmit('send', 'Poslat');
+		$form->addSubmit('send', 'Pošalji');
 
 		$form->onSuccess[] = callback($this, 'lostPassFormSubmitted');
 		return $form;
@@ -98,10 +98,10 @@ class LoginPresenter extends BasePresenter
     try {
             $mail->send();
     } catch (InvalidStateException $e) {
-            throw new IOException('Nepodařilo se odeslat e-mail, zkuste to prosím za chvíli.');
+            throw new IOException('Slanje e-maila nije uspjelo. Molimo pokušajte kasnije.');
     }
 
-		$this->flashMessage('Zkontrolujte prosím svůj email a postupujte dle instrukcí.');
+		$this->flashMessage('Molimo provjerite svoj e-mail i postupite prema instrukcijama.');
 		$this->redirect('Login:form');
 	}
 
@@ -109,7 +109,7 @@ class LoginPresenter extends BasePresenter
 	public function actionNewPass($auth){
 		$data = dibi::fetch('SELECT  * FROM [::users] WHERE auth_lost_pass= %s',$auth);
 		if(!$data){
-			$this->flashMessage('Bohužel odkaz pro obnovu hesla je chybný, zkuste ho správně zkopírovat, nebo vygenerujte nový.');
+			$this->flashMessage('Nažalost, link za reset šifre je pogrešan. Pokušajte da ga kopirate pravilno ili generišite novi.');
 			$this->redirect('Login:lostPass');
 		}
 
@@ -122,15 +122,15 @@ class LoginPresenter extends BasePresenter
 
 		$form = new AppForm($this, 'newPassForm');
 		$form->addHidden('auth');
-		$form->addPassword('pass', 'Nové heslo')
-			->addRule(Form::FILLED, 'Zvolte si své heslo')
-			->addRule(Form::MIN_LENGTH, 'Heslo je příliš krátké, alespoň %d znaků', 5);
-		$form->addPassword('pass2', 'Potvrzení hesla')
+		$form->addPassword('pass', 'Nova šifra')
+			->addRule(Form::FILLED, 'Izaberite svoju šifru')
+			->addRule(Form::MIN_LENGTH, 'Šifra je prekratka, mora biti najmanje %d znakova', 5);
+		$form->addPassword('pass2', 'Potvrda šifre')
 			->addConditionOn($form['pass'], Form::VALID)
-				->addRule(Form::FILLED, 'Vložte heslo ještě jednou pro potvrzení')
-				->addRule(Form::EQUAL, 'Hesla se neshodují, vypište znovu', $form['pass']);
+				->addRule(Form::FILLED, 'Unesite šifru još jednom kako bi potvrdili')
+				->addRule(Form::EQUAL, 'Šifre nisu iste, unesite ponovo', $form['pass']);
 
-		$form->addSubmit('send', 'Uložit');
+		$form->addSubmit('send', 'Sačuvaj');
 
 		$form->onSubmit[] = callback($this, 'newPassFormSubmitted');
 		return $form;
@@ -140,7 +140,7 @@ class LoginPresenter extends BasePresenter
 		$pass = sha1($form['pass']->value);
 		dibi::query('UPDATE [::users] SET pass = %s',$pass,', auth_lost_pass=\'\' WHERE auth_lost_pass= %s',$form['auth']->value);
 
-		$this->flashMessage('Nové heslo bylo nastaveno, můžete se přihlásit.');
+		$this->flashMessage('Nova šifra je podešena, možete se prijaviti.');
 		$this->redirect('Login:form');
 
 	}

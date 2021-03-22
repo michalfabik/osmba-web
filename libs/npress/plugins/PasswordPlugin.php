@@ -27,9 +27,9 @@ class PasswordPlugin extends Control
       if (!$this->isLoggedIn()) {
         $link = $this->link('login');
         echo "
-				<p>Pro přístup ke stránce se prosím přihlašte:
+				<p>Molim da se prijavite za pristup stranici:
 				<form action='$link' method='post'>
-				Heslo: <input type='password' name='heslo'><input type='submit' value='Přihlásit'>
+                Šifra: <input type='password' name='heslo'><input type='submit' value='Prijava'>
 				</form>
 
 				";
@@ -40,7 +40,7 @@ class PasswordPlugin extends Control
 
       if ($this->config['logoutlink']) {
         $link = $this->link('logout');
-        echo "<a href='$link'>Odhlásit</a>";
+        echo "<a href='$link'>Odjava</a>";
       }
     }
     return true;

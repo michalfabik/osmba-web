@@ -31,16 +31,16 @@ class ContactFormPlugin extends Control
   public function createComponentContactForm()
   {
     $form = new Form();
-    $form->addText("name", "Jméno");
+    $form->addText("name", "Ime");
     $form
       ->addText("email", "E-mail")
       //->setDefaultValue('@')
-      ->setRequired('Vyplňte, prosím, správně svůj email.')
-      ->addRule(Form::EMAIL, 'Vyplňte, prosím, správně svůj email.');
+      ->setRequired('Molimo popunite ispravan e-mail.')
+      ->addRule(Form::EMAIL, 'Molimo popunite ispravan e-mail.');
     $form
-      ->addTextArea("text", "Zpráva")
-      ->setRequired('Vyplňte, prosím, svou zprávu.');
-    $form->addSubmit("submit1", "Odeslat");
+      ->addTextArea("text", "Poruka")
+      ->setRequired('Molimo popunite svoju poruku');
+    $form->addSubmit("submit1", "Pošalji");
     //$form->addProtection(); //sends cookie ... wtf?
     $form->onSuccess[] = callback($this, 'contactFormSubmitted');
     return $form;
@@ -54,12 +54,12 @@ class ContactFormPlugin extends Control
     $mail->setFrom($form['email']->value, $form['name']->value);
     $mail->addTo($this->parent->page->getMeta('ContactFormPlugin'));
     $mail->setSubject(
-      'Zpráva z webu ' . $this->parent->context->params['npress']['webTitle']
+      'Poruka sa sajta ' . $this->parent->context->params['npress']['webTitle']
     );
     $mail->setHtmlBody($form['text']->value);
     $mail->send();
 
-    $this->parent->flashMessage('Zpráva byla odeslána.');
+    $this->parent->flashMessage('Poruka je poslata.');
     $this->parent->redirect('this');
   }
 }

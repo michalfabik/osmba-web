@@ -48,8 +48,8 @@ class NpFilesControl extends Control
   {
     $form = new Form();
     $form->addHidden("id_page");
-    $form->addUpload("file", "soubor");
-    $form->addSubmit("submit1", "Nahrát");
+    $form->addUpload("file", "fajl");
+    $form->addSubmit("submit1", "Pošalji");
     $form->onSuccess[] = callback($this, 'uploadFormSubmitted');
     return $form;
   }
@@ -63,9 +63,9 @@ class NpFilesControl extends Control
     $file = $form->values['file'];
     if ($file->isOK()) {
       FilesModel::upload($this->page->id, $file);
-      $this->presenter->flashMessage('Soubor úspěšně nahrán');
+      $this->presenter->flashMessage('Fajl je uspješno uploadovan');
     } else {
-      $this->presenter->flashMessage('Nahrání se nepovedlo :-(');
+      $this->presenter->flashMessage('Upload nije uspio :-(');
     }
 
     $this->redirect('this#toc-files');
@@ -85,13 +85,13 @@ class NpFilesControl extends Control
     $files = $this->httpRequest->getFile('files');
     if (!$files) {
       return $this->presenter->flashMessage(
-        'Chyba: soubory se nenahrály, zkuste opakovat.'
+        'Greška: upload fajlova nije uspio, probajte ponovo.'
       );
     }
 
     foreach ($files as $file) {
       FilesModel::upload($this->page->id, $file);
-      $this->presenter->flashMessage("Soubor $file->name úspěšně nahrán.");
+      $this->presenter->flashMessage("Fajl $file->name je uspješno uploadovan.");
     }
   }
 
@@ -124,21 +124,21 @@ class NpFilesControl extends Control
     $form->addHidden("id");
     $form->addSelect(
       "id_page_change",
-      "Přesun",
+      "Premjesti",
       PagesModel::getPagesFlat()->getPairs()
     );
-    $form->addText("filename", "Název");
+    $form->addText("filename", "Naziv");
     $form
-      ->addTextarea("description", "Popis")
+      ->addTextarea("description", "Opis")
       ->getControlPrototype()
       ->setRows(3);
     $form->addText("keywords", "Keywords");
     $form->addText("timestamp", "Timestamp");
     $form
-      ->addText("gallerynum", "Číslo galerie")
+      ->addText("gallerynum", "Broj galerije")
       ->getControlPrototype()
       ->style('width:50px'); //TODO ->addRule(Form::INTEGER,'%label musí být číslo')  .. nefunguje js(ajax) validace
-    $form->addSubmit("submit1", "Uložit");
+    $form->addSubmit("submit1", "Sačuvaj");
     $form->onSuccess[] = callback($this, 'editFileFormSubmitted');
     return $form;
   }
@@ -156,7 +156,7 @@ class NpFilesControl extends Control
     $file = FilesModel::getFile($values['id']);
     $file->save($values);
 
-    $this->presenter->flashMessage("Popis souboru #$file->id uložen");
+    $this->presenter->flashMessage("Opis fajla");
     $this->invalidateControl('editform_filelist');
 
     //TODO (ask) zrušit submitted signál (jak redirect na action?)
@@ -174,8 +174,8 @@ class NpFilesControl extends Control
     $form = new Form();
     $form->getElementPrototype()->class('ajax_upload');
     $form->addHidden("id");
-    $form->addUpload("file", "soubor");
-    $form->addSubmit("submit1", "Nahrát");
+    $form->addUpload("file", "fajl");
+    $form->addSubmit("submit1", "Uploaduj");
     $form->onSuccess[] = callback($this, 'previewUploadFormSubmitted');
     return $form;
   }
@@ -211,7 +211,7 @@ class NpFilesControl extends Control
 
     FilesModel::sort($this->httpRequest->post);
     //dom is enough //$this->invalidateControl('editform_filelist'); //(all dynamic snippets)
-    $this->presenter->flashMessage("Pořadí souborů upraveno");
+    $this->presenter->flashMessage("Redoslijed fajlova je promijenjen");
   }
 
   public function handleDeleteFile($fid, $undo = false)
@@ -224,11 +224,11 @@ class NpFilesControl extends Control
       FilesModel::edit(array('id' => $fid, 'deleted' => true));
       $undolink = $this->link('deleteFile!#toc-files', $fid, true); //undo=true
       $this->presenter->flashMessage(
-        "Soubor #$fid smazán"
+        "Fajl #$fid je izbrisan"
       )->undolink = $undolink;
     } else {
       FilesModel::edit(array('id' => $fid, 'deleted' => false));
-      $this->presenter->flashMessage("Soubor #$fid navrácen zpět");
+      $this->presenter->flashMessage("Fajl #$fid je obnovljen");
       $this->invalidateControl('editform_filelist');
     }
     if (!$this->presenter->isAjax()) {

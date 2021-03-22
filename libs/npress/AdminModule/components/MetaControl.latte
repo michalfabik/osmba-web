@@ -1,6 +1,6 @@
 
 
-<h3 id='toc-meta'>další nastavení: <small><input type="checkbox" id="js-showHiddenMeta" class="hidden"> zobrazit</small></h3>
+<h3 id='toc-meta'>dodatne postavke: <small><input type="checkbox" id="js-showHiddenMeta" class="hidden"> prikaži</small></h3>
 <div id='js-meta-content' class='jshidden'>
 <ul>
 	<li>.category=yes, .hideTextInput=yes, .template=file (latte file in theme/), hideHeading, .filesSync
@@ -25,13 +25,13 @@
 		</div>
 
 	{form metaAddForm}
-		{input key placeholder=>'(název)'}: {input value} {input submit1 class=>"btn"}
+		{input key placeholder=>'(naziv)'}: {input value} {input submit1 class=>"btn"}
 	{/form}
 
-	<noscript>Pozor, nastavení lze upravovat pouze JEDNOTLIVĚ.</noscript>
+	<noscript>Pažnja, postavke je moguće mijenjati samo jednu po jednu.</noscript>
 </div>
 </div>
-<p {*n:if="count($langs)>1"*}>Nastavení jsou společná napříč jazykovými mutacemi.</p>
+<p {*n:if="count($langs)>1"*}>Postavke se odnose na sve jezičke verzije.</p>
 
 </div>
 
